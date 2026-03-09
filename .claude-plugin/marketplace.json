@@ -1,0 +1,21 @@
+{
+  "name": "deep-research-marketplace",
+  "owner": {
+    "name": "hiimivantang"
+  },
+  "metadata": {
+    "description": "Structured deep research workflow with outline generation, web-powered investigation, and report synthesis",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "deep-research",
+      "source": "./",
+      "description": "Structured deep research workflow with outline generation, web-powered investigation, and report synthesis. Supports academic, technical, market, and due diligence research.",
+      "version": "1.0.0",
+      "keywords": ["research", "deep-research", "report", "web-search", "academic", "market-research"],
+      "category": "productivity",
+      "skills": "./skills/"
+    }
+  ]
+}
