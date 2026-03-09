@@ -19,18 +19,44 @@ A structured research workflow skill for Claude Code, OpenCode, and Codex, suppo
 
 ## Installation
 
+### Claude Code (Plugin - Recommended)
+
+Install directly as a Claude Code plugin via repo link:
+
+```
+/plugin install https://github.com/Weizhena/deep-research-skills
+```
+
+Or test locally during development:
+
+```bash
+git clone https://github.com/Weizhena/deep-research-skills.git
+claude --plugin-dir ./deep-research-skills
+```
+
+**Required**: Install Python dependency:
+```bash
+pip install pyyaml
+```
+
+### Claude Code (Manual)
+
+<details>
+<summary>Click to expand manual installation</summary>
+
 ```bash
 git clone https://github.com/Weizhena/deep-research-skills.git
 cd deep-research-skills
-```
 
-### Claude Code
-```bash
 # English version
-cp -r skills/research-en/* ~/.claude/skills/
+cp -r skills/research/* ~/.claude/skills/research/
+cp -r skills/research-deep/* ~/.claude/skills/research-deep/
+cp -r skills/research-add-items/* ~/.claude/skills/research-add-items/
+cp -r skills/research-add-fields/* ~/.claude/skills/research-add-fields/
+cp -r skills/research-report/* ~/.claude/skills/research-report/
 
-# Chinese version
-cp -r skills/research-zh/* ~/.claude/skills/
+# Chinese version (from variants/)
+# cp -r variants/research-zh/* ~/.claude/skills/
 
 # Required: Install agent and modules
 cp agents/web-search-agent.md ~/.claude/agents/
@@ -40,10 +66,19 @@ cp -r agents/web-search-modules ~/.claude/agents/
 pip install pyyaml
 ```
 
+</details>
+
 ### OpenCode (default: gpt-5.4)
+
+<details>
+<summary>Click to expand OpenCode installation</summary>
+
 ```bash
-# Skills (same as Claude Code)
-cp -r skills/research-en/* ~/.claude/skills/   # or research-zh for Chinese
+git clone https://github.com/Weizhena/deep-research-skills.git
+cd deep-research-skills
+
+# Skills
+cp -r skills/* ~/.claude/skills/   # or variants/research-zh for Chinese
 
 # Required: Enable web search for current shell
 export OPENCODE_ENABLE_EXA=1
@@ -62,15 +97,23 @@ pip install pyyaml
 
 > **Important**: In OpenCode, ANY model's websearch requires `OPENCODE_ENABLE_EXA=1`. A plain `export` only affects the current shell; writing it to `~/.bashrc` makes it persistent. Without it, you only get `web fetch`, which is weaker for the deep research phase.
 
+</details>
+
 ### Codex
+
+<details>
+<summary>Click to expand Codex installation</summary>
+
 ```bash
+git clone https://github.com/Weizhena/deep-research-skills.git
+cd deep-research-skills
+
 # English version
 mkdir -p ~/.codex/skills ~/.codex/agents
-cp -r skills/research-codex-en/* ~/.codex/skills/
+cp -r variants/research-codex-en/* ~/.codex/skills/
 
 # Chinese version
-mkdir -p ~/.codex/skills ~/.codex/agents
-cp -r skills/research-codex-zh/* ~/.codex/skills/
+# cp -r variants/research-codex-zh/* ~/.codex/skills/
 
 # Required: Install web researcher agent and modules
 cp agents-codex/web-researcher.toml ~/.codex/agents/
@@ -103,21 +146,23 @@ description = "Use this agent when you need to research information on the inter
 config_file = "agents/web-researcher.toml"
 ```
 
+</details>
+
 ## Commands
 
-> **Claude Code 2.1.0+**: Direct `/skill-name` trigger is now supported!
->
-> **Older versions**: Use `run /skill-name` format instead.
->
-> **Codex**: You can trigger these skills from `/skills` -> `List Skills`, or ask naturally, for example `Use the research skill to build an outline for AI Agent Demo 2025`.
+When installed as a **plugin**, skills are namespaced with `deep-research:`:
 
-| Command (2.1.0+) | Description |
+| Plugin Command | Description |
 |------------------|-------------|
-| `/research` | Generate research outline with items and fields |
-| `/research-add-items` | Add more research items to existing outline |
-| `/research-add-fields` | Add more field definitions to existing outline |
-| `/research-deep` | Deep research each item with parallel agents |
-| `/research-report` | Generate markdown report from JSON results |
+| `/deep-research:research` | Generate research outline with items and fields |
+| `/deep-research:research-add-items` | Add more research items to existing outline |
+| `/deep-research:research-add-fields` | Add more field definitions to existing outline |
+| `/deep-research:research-deep` | Deep research each item with parallel agents |
+| `/deep-research:research-report` | Generate markdown report from JSON results |
+
+When installed **manually** (standalone), use without namespace: `/research`, `/research-deep`, etc.
+
+> **Codex**: You can trigger these skills from `/skills` -> `List Skills`, or ask naturally, for example `Use the research skill to build an outline for AI Agent Demo 2025`.
 
 ## Workflow & Example
 
@@ -125,7 +170,7 @@ config_file = "agents/web-researcher.toml"
 
 ### Phase 1: Generate Outline
 ```
-/research AI Agent Demo 2025
+/deep-research:research AI Agent Demo 2025
 ```
 💡 **What will happen**: Tell it your topic → It creates a research list for you
 
@@ -133,14 +178,14 @@ config_file = "agents/web-researcher.toml"
 
 ### (Optional) Not satisfied? Add more
 ```
-/research-add-items
-/research-add-fields
+/deep-research:research-add-items
+/deep-research:research-add-fields
 ```
 💡 **What will happen**: Add more research items or field definitions
 
 ### Phase 2: Deep Research
 ```
-/research-deep
+/deep-research:research-deep
 ```
 💡 **What will happen**: AI automatically searches the web for each item, one by one
 
@@ -148,7 +193,7 @@ config_file = "agents/web-researcher.toml"
 
 ### Phase 3: Generate Report
 ```
-/research-report
+/deep-research:research-report
 ```
 💡 **What will happen**: All data → One organized report
 

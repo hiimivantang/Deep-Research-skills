@@ -1,0 +1,10 @@
+{
+  "name": "deep-research",
+  "description": "Structured deep research workflow with outline generation, web-powered investigation, and report synthesis. Supports academic, technical, market, and due diligence research.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Weizhena"
+  },
+  "repository": "https://github.com/Weizhena/deep-research-skills",
+  "license": "MIT"
+}

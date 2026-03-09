@@ -51,8 +51,8 @@ Read {fields_path} to get all field definitions
 {output_path}
 
 ## Validation
-After completing JSON output, run validation script to ensure complete field coverage:
-python ~/.claude/skills/research/validate_json.py -f {fields_path} -j {output_path}
+After completing JSON output, use Glob to find `**/validate_json.py` and run it to ensure complete field coverage:
+python <path_to_validate_json.py> -f {fields_path} -j {output_path}
 Task is complete only after validation passes.
 """
 ```
@@ -62,10 +62,10 @@ Task is complete only after validation passes.
 ## Task
 Research name: GitHub Copilot
 category: International Product
-description: Developed by Microsoft/GitHub, first mainstream AI coding assistant, ~40% market share, output structured JSON to /home/weizhena/AIcoding/aicoding-history/results/GitHub_Copilot.json
+description: Developed by Microsoft/GitHub, first mainstream AI coding assistant, ~40% market share, output structured JSON to ./aicoding-history/results/GitHub_Copilot.json
 
 ## Field Definitions
-Read /home/weizhena/AIcoding/aicoding-history/fields.yaml to get all field definitions
+Read ./aicoding-history/fields.yaml to get all field definitions
 
 ## Output Requirements
 1. Output JSON according to fields defined in fields.yaml
@@ -74,11 +74,11 @@ Read /home/weizhena/AIcoding/aicoding-history/fields.yaml to get all field defin
 4. All field values must be in English
 
 ## Output Path
-/home/weizhena/AIcoding/aicoding-history/results/GitHub_Copilot.json
+./aicoding-history/results/GitHub_Copilot.json
 
 ## Validation
-After completing JSON output, run validation script to ensure complete field coverage:
-python ~/.claude/skills/research/validate_json.py -f /home/weizhena/AIcoding/aicoding-history/fields.yaml -j /home/weizhena/AIcoding/aicoding-history/results/GitHub_Copilot.json
+After completing JSON output, use Glob to find `**/validate_json.py` and run it:
+python <path_to_validate_json.py> -f ./aicoding-history/fields.yaml -j ./aicoding-history/results/GitHub_Copilot.json
 Task is complete only after validation passes.
 ```
 
